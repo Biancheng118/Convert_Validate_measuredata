@@ -1,0 +1,4 @@
+
+MakeNamedMaterial "my_custom_material"
+    "string type" [ "measured" ]
+    "string filename" [ "bsdfs/rgl_RGB_test.bsdf" ]

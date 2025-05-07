@@ -1,0 +1,42 @@
+# --- Scene Settings ---
+LookAt 0.000788 0.000787 0.001897 0.000788 0.000787 -0.998103 0.000000 1.000000 0.000000
+Camera "perspective" "float fov" [ 21.3930 ]
+Film "rgb"
+  "integer xresolution" [ 2048 ]
+  "integer yresolution" [ 2048 ]
+  "string filename" [ "test7.png" ]
+Sampler "zsobol" "integer pixelsamples" [ 64 ]
+Integrator "path" "integer maxdepth" [ 16 ]
+
+
+WorldBegin
+
+# --- Light Sources ---
+AttributeBegin
+  LightSource "infinite"
+    "string filename" [ "qwantani_puresky_4k_equiarea.exr" ]
+    "float scale" [ 1.00000 ]
+AttributeEnd
+
+# --- Material Definitions ---
+MakeNamedMaterial "warp_material_rgl"
+    "string type" [ "measured" ]
+    "string filename" [ "bsdfs/replaced_wavelengths.bsdf" ]
+
+MakeNamedMaterial "weft_material"
+  "string type" "dielectric"
+  "float eta" [ 1.63000 ]
+  "float roughness" [ 0.07000 ]
+
+# --- Geometry Includes ---
+# Warp Fibers
+AttributeBegin
+  NamedMaterial "warp_material_rgl"
+  Include "warp_geometry.pbrt"
+AttributeEnd
+
+# Weft Fibers
+AttributeBegin
+  NamedMaterial "weft_material"
+  Include "weft_geometry.pbrt"
+AttributeEnd
